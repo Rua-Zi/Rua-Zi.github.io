@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -128,4 +121,3 @@ venv.bak/
 /errors/too_late_1918.csv
 /errors/too_late_1919.csv
 /errors/too_late_1920.csv
->>>>>>> 28ff79517243046342c88cec49d38952a8dcf327

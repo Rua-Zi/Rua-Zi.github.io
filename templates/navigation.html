@@ -1,0 +1,43 @@
+<p>
+	<a href="/" class="button">Dashboard</a>
+	<a href="/information" class="button">Information</a>
+	<a href="/downloads" class="button">Downloads</a>
+	<a href="/vessels" class="button">Vessels</a>
+	<a href="/masters" class="button">Masters</a>
+	<a href="/cargos" class="button">Cargos</a>
+	<a href="/activities" class="button">Activities</a>
+	<a href="/registered_ports" class="button">Registered Ports</a>
+	<a href="/from_ports" class="button">Ports of Origin</a>
+	<a href="/fishing_port_registration_numbers" class="button">Fishing Port Registration Numbers</a>
+	<a href="/weather" class="button">Weather</a>
+	<a href="/notes" class="button">Notes</a>
+	<a href="/transcriber_notes" class="button">With Transcriber Notes</a>
+	<a href="/thanks" class="button">Thanks</a>
+</p>
+<p>
+	Graphs
+	<a href="/graphs_cargo" class="button">Cargo by Time</a>
+	<a href="/graphs_cargo_by_kind" class="button">Cargo by Type</a>
+	<a href="/graphs_activity" class="button">Activity by Time</a>
+	<a href="/graphs_activity_by_kind" class="button">Activity by Type</a>
+	<a href="/graphs_top_vessels" class="button">Top Vessels</a>
+	<a href="/graphs_registered_ports" class="button">Registered Ports</a>
+	<a href="/graphs_from_ports" class="button">Ports of Origin</a>
+</p>
+<p>
+	With Question Marks
+	<a href="/vessel/%3F" class="button">Vessels</a>
+	<a href="/master/%3F" class="button">Masters</a>
+	<a href="/cargo/%3F" class="button">Cargos</a>
+	<a href="/registered_port/%3F" class="button">Registered Ports</a>
+	<a href="/from_port/%3F" class="button">Ports of Origin</a>
+</p>
+
+<p>
+	Arrival Records
+	{% for year in range(1914, 1921) %}
+	<a href="/arrivals/{{year}}" class="button">{{year}}</a>
+	{% endfor %}
+	<a href="/arrivals_after/1920" class="button">After 1920 - probably transcription errors</a>
+	<a href="/day/1914/1/1" class="button">Browse Days</a>
+</p>

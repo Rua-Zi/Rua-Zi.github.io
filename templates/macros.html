@@ -1,0 +1,131 @@
+{% macro entries_table(entries) %}
+	<table class="dataframe">
+		<tr>
+			<th>Date</th>
+			<th></th>
+			<th>Vessel</th>
+			<th>Number</th>
+			<th style="text-align: center">Registered Port</th>
+			<th>Master</th>
+			<th style="text-align: right">Registered Tonnage</th>
+			<th>Port of Origin</th>
+			<th>Cargo</th>
+			<th>Activity</th>
+			<th>Fishing Port Registration Number</th>
+			<th>Checked</th>
+		</tr>
+	{% for entry in entries %}
+		{% if entry[12] %}
+			<tr>
+				<td colspan="12" style="background-color: #00000040;"><strong>Transcriber note for following entry:</strong> {{ entry[12] }}</td>
+			</tr>
+		{% endif %}
+		<tr>
+			<td nowrap>
+				{% if entry[0] != None %}
+					<a href="/day/{{ entry[0].split('-')[2] }}/{{ entry[0].split('-')[1] }}/{{ entry[0].split('-')[0] }}" class="link">{{ entry[0] }}</a>
+				{% else %}
+					{{ entry[0] }}
+				{% endif %}
+			</td>
+			<td>{{ entry[2] }}</td>
+			<td nowrap><a href="/vessel/{{ entry[1] }}" class="link">{{ entry[1] }}</a></td>
+			<td style="text-align: right;">{{ entry[3] }}</td>
+			<td style="text-align: center"><a href="/registered_port/{{ entry[4] }}" class="link">{{ entry[4] }}</a></td>
+			<td><a href="/master/{{ entry[5] }}" class="link">{{ entry[5] }}</a></td>
+			<td style="text-align: right;">{{ entry[6] }}</td>
+			<td><a href="/from_port/{{ entry[7] }}" class="link">{{ entry[7] }}</a></td>
+			<td><a href="/cargo/{{ entry[8] }}" class="link">{{ entry[8] }}</a></td>
+			<td nowrap><a href="/activity/{{ entry[9] }}" class="link">{{ entry[9] }}</a></td>
+			<td><a href="/fishing_port_registration_number/{{ entry[11] }}" class="link">{{ entry[11] }}</a></td>
+			<td style="text-align: center">
+				{% if entry[10] == '' %}
+				{% else %}
+					Yes
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+
+	<section class="box">
+		<h2>Column Definitions</h2>
+		<div style="text-align:left">
+			<dl>
+				<dt>Date</dt>
+				<dd>The date the vessel arrived at Aberdeen harbour</dd>
+				<dt>Vessel</dt>
+				<dd>Name of the vessel that arrived on the date</dd>
+				<dt>Number</dt>
+				<dd>Entry number in the log book</dd>
+				<dt>Registered Port</dt>
+				<dd>The port, or country, in which the vessel was registered at</dd>
+				<dt>Master</dt>
+				<dd>The person or company in charge of running the vessel</dd>
+				<dt>Registered Tonnage</dt>
+				<dd>Net registered tonnage of the vessel arriving</dd>
+				<dt>Port of Origin</dt>
+				<dd>The port that the vessel sailed from to arrive at Aberdeen</dd>
+				<dt>Cargo</dt>
+				<dd>What the vessel was carrying</dd>
+				<dt>Activity</dt>
+				<dd>What activity the vessel was carrying out. Note: this is extracted from the source transcribed cargo.</dd>
+				<dt>Checked</dt>
+				<dd>Has the transcription been checked by a second person</dd>
+			</dl>
+		</div>
+	</section>
+
+	<section class="box">
+		<h2>Vessel Types</h2>
+		<div style="text-align:left">
+			<dl>
+				<dt>HM Col</dt><dd>Collier. Coal for ship bunkers, sometimes they carried general stores or goods</dd>
+				<dt>HM Des</dt><dd>Destroyer</dd>
+				<dt>HM Tug</dt><dd>Admiralty or hired tug</dd>
+				<dt>HMGB</dt><dd>Motor Gun Boat</dd>
+				<dt>HDML</dt><dd>Harbour defence motor launch</dd>
+				<dt>HMAS</dt><dd>Armed sloop</dd>
+				<dt>HMBD</dt><dd>Boom defence vessel. Trawlers, drifters and fishermen ideal for handling torpedo nets etc used in defence of port entrances and large capital ships</dd>
+				<dt>HMC</dt><dd>Collier. Coal for ship bunkers, sometimes they carried general stores or goods</dd>
+				<dt>HMHS</dt><dd> Hospital ship</dd>
+				<dt>HML</dt><dd>Mine layer</dd>
+				<dt>HML</dt><dd>Motor launch</dd>
+				<dt>HMMB</dt><dd>Motor boat</dd>
+				<dt>HMML</dt><dd>Mine layer</dd>
+				<dt>HMMS</dt><dd>Minesweeper</dd>
+				<dt>HMO</dt><dd>His Majesty’s Oiler. Fuel oil carrier</dd>
+				<dt>HMP</dt><dd>Patrol vessel</dd>
+				<dt>HMQS</dt><dd>Q Ship, used as decoy to engage U-boats, masqueraded as unarmed. When U-boat surfaced they could fight back.</dd>
+				<dt>HMRT</dt><dd>Rescue tug</dd>
+				<dt>HMS</dt><dd>His Majesty’s Ship. Regular naval vessel</dd>
+				<dt>HMSL</dt><dd>His Majesty’s Small Launch</dd>
+				<dt>HMSML</dt><dd>Small motor launch</dd>
+				<dt>HMSS</dt><dd>Submarine</dd>
+				<dt>HMT</dt><dd>Hired Military Transport</dd>
+				<dt>HMTB</dt><dd>Torpedo Boat</dd>
+				<dt>HMTS</dt><dd>Hired Military Transport (maybe mis-type in transcription)</dd>
+				<dt>HMW</dt><dd>His Majesty’s Whaler</dd>
+				<dt>HMY</dt><dd>Hired or requisitioned yacht</dd>
+			</dl>
+		</div>
+	</section>
+{% endmacro %}
+
+{% macro grouped_entries(title, detail_page, entries) %}
+	<h2>{{ title }} ({{ entries|length }} unique)</h2>
+	<div style="text-align: left">
+		<ul>
+		{% set ns = namespace(letter = ' ') %}
+		{% for entry in entries %}
+			{% if entry[0] != ns.letter %}
+				{% set ns.letter = entry[0] %}
+				</ul>
+				<h3>{{ ns.letter }}</h3>
+				<ul>	
+			{% endif %}
+			<li><a href = {{ url_for(detail_page, filter=entry)}} class="link">{{ entry }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+{% endmacro %}

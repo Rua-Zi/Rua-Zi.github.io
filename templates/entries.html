@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% from "macros.html" import entries_table with context %}
+
+{% block title %}Aberdeen Harbour Historic Arrival Records {{ year }}{% endblock %}
+
+{% block content %}
+{% if source %}
+<a href="{{ source }}" class="link">Source files</a>
+{% endif %}
+
+{{ entries_table(entries) }}
+{% endblock %}

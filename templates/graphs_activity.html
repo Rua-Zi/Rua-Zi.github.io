@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Arrivals Activity by Time{% endblock %}
+
+{% block content %}
+	{% for year in range(1914, 1921) %}
+		<img src="/plot/activity/{{year}}" alt="Image Placeholder">
+	{% endfor %}
+{% endblock %}

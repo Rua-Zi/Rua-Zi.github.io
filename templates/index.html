@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% from "macros.html" import entries_table with context %}
+
+{% block title %}Aberdeen Harbour Arrival History{% endblock %}
+
+{% block content %}
+<section class="box">
+  <div class="body">
+    <p>
+      This site contains information about the arrival of vessels into Aberdeen
+      harbour between 1914 and 1920. The data has been transcribed from harbour log
+      books of the period.
+    </p>
+    <p>
+      Please read the <a href="/information" class="button">Information</a> page for details about the various assumptions that have been made about the data and any questions we are hoping the wider community can answer.
+    </p>
+  </div>
+</section>
+
+
+{% if records_count == 0 %}
+  <section class="box">
+    <h3>Note</h3>
+    <div class="body">
+      <p>
+        If the records checked is displaying 0 or none of the years contain data
+        then it means the last data import failed due to an unexpected value in one
+        of the columns.
+      </p>
+      <p>
+        So far non-date values in the date column have caused this problem to
+        occur. Please check that no such values are present and hopefully it will
+        rectify the import on the next attempt.
+      </p>
+    </div>
+  </section>
+{% endif %}
+
+<h2>Transcription Progress</h2>
+
+<section class="box">
+  <div class="cards">
+    <div class="card">
+      <div class="content">
+        <p style="font-family: sans-serif; font-size: 16px; font-weight: bold;">
+          Records Transcribed
+        </p>
+        <p style="
+            text-anchor: middle;
+            font-family: Arial;
+            font-size: 29px;
+            font-weight: bold;
+            fill-opacity: 1;
+            color: black;
+          ">
+          {{ records_count }}
+        </p>
+      </div>
+      <footer>{{ records_count }} records have been transcribed.</footer>
+    </div>
+    <div class="card">
+      <div class="content">
+        <div id="gChecking"></div>
+      </div>
+      <footer>
+        {{ checked_records_count }} records checked by a second person.
+      </footer>
+    </div>
+  </div>
+</section>
+<p>Last update: {{ last_import }}</p>
+
+<script src="../static/raphael-2.1.4.min.js"></script>
+<script src="../static/justgage.js"></script>
+<script>
+  var gChecking;
+  document.addEventListener("DOMContentLoaded", function (event) {
+    gChecking = new JustGage({
+      id: "gChecking",
+      value: {{ checked_records_count }},
+    valueFontColor: "black",
+    min: 0,
+    max: {{ records_count }},
+    levelColors: ["#ff0000", "#f9c802", "#a9d70b"],
+    title: "Records Checked",
+    label: "Records",
+    gaugeWidthScale: 0.3,
+    displayRemaining: true,
+    pointer: false,
+    titleFontColor: "black",
+    labelFontColor: "black",
+    counter: true,
+    donut: true
+  		});
+    });
+</script>
+
+<section class="box">
+  <h2>Arrival Records</h2>
+  <p>
+    The transcribed arrival records for each year can be viewed via the following
+    links:
+  </p>
+  <p>
+    {% for year in range(1914, 1921) %}
+    <a href="/arrivals/{{year}}" class="button">{{year}}</a>
+    {% endfor %}
+  </p>
+</section>
+
+<section class="box">
+  <h2>On this day in history</h2>
+  <p>
+    Today in 
+    {% for year in range(1914, 1921) %}
+      <a href="/day/{{year}}/{{ this_day.split('-')[1] }}/{{ this_day.split('-')[0] }}" class="button">{{year}}</a>
+    {% endfor %}
+  </p>
+
+  <table class="dataframe">
+    <tr>
+      <th>Date</th>
+      <th>Weather</th>
+    </tr>
+    {% for entry in on_this_day_weather %}
+    <tr>
+      <td nowrap>{{ entry[0] }}</td>
+      <td>{{ entry[1] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+{{ entries_table(on_this_day) }}
+
+{% endblock %}

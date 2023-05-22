@@ -1,0 +1,154 @@
+body {
+	background: white;
+	color: black;
+	text-align: center;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+ul {
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3;
+}
+
+.header {
+  background-color: paleturquoise;
+  padding: 10px;
+  margin: 0px;
+  border: 1px solid rgba(96, 139, 168, .2);
+}
+
+.content {
+  margin: 20px;
+}
+
+.disclaimer {
+  background-color: lightcyan;
+}
+
+.box {
+  background-color: lightcyan;
+  margin-top: 10px;
+}
+
+.box h2 {
+  margin-top: 5px;
+  border-bottom: 1px solid rgba(96, 139, 168, .2);
+}
+
+.button {
+	font: bold 15px Arial;
+	text-decoration: none;
+	background-color: darkcyan;
+	color: white;
+	padding: 2px 6px 2px 6px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #CCCCCC;
+}
+
+.link {
+	font: bold 15px Arial;
+	text-decoration: none;
+	color: #101010;
+}
+
+a:hover {
+  color: yellow;
+  background-color: black;
+}
+
+.information {
+	padding: 4px;
+	margin: 5px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #CCCCCC;
+}
+
+img{
+	display: display: inline-block
+}
+
+.body p {
+	text-align: left;
+}
+
+.body dl {
+  text-align: left;
+}
+
+.body dt {
+  font-weight: bold;
+}
+
+.body dd { 
+  display: block;
+  margin-left: 40px;
+  padding-bottom: 5px;
+}
+
+table.dataframe, .dataframe th, .dataframe td {
+  border: none;
+  border-bottom: 1px solid #C8C8C8;
+  border-collapse: collapse;
+  text-align:left;
+  padding: 10px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 1px solid #C8C8C8;
+  border-right: 1px solid #C8C8C8;
+}
+
+table.dataframe th {
+  background-color: paleturquoise;
+  border-top: 1px solid #C8C8C8;
+}
+
+section {
+  width: 90%;
+  max-width: 700px;
+  border: 1px solid rgba(96, 139, 168, .2);
+  border-radius: 2px;
+  padding: 10px 14px 10px 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  grid-gap: 10px;
+}
+
+.card {
+  border: 2px solid black;
+  #border-radius: 5px;
+}
+
+.card .content {
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.card footer {
+  background-color: rgba(96, 139, 168, .2);
+  padding: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card .content {
+  flex: 1 1 auto;
+}

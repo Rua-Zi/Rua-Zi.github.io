@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Aberdeen Harbour Arrival History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css?u={{ last_updated }}/" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>
+    #gChecking {
+      width: 200px;
+      height: 160px;
+      display: inline-block;
+      margin: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    {% include 'navigation.html' %}
+  </div>
+  <div class="content">
+
+    {% include 'disclaimer.html' %}
+
+    {% if errors|length > 0 %}
+      <section class="box" style="background-color: red; color: white;">
+        <div class="body">
+          <h2>Errors!</h2>
+          <p>
+            {% for error in errors %}
+              <strong>{{ error }}</strong><br/>
+            {% endfor %}
+          </p>
+          <p>Maybe it is an <a href="https://github.com/CodeTheCity/historical_harbour_arrivals_api/issues" class="button">issue</a> you can help us out with?</p>
+          <p>
+            If the records checked is displaying 0 or none of the years contain data
+            then it means the last data import failed due to an unexpected value in one
+            of the columns.
+          </p>
+          <p>
+            So far non-date values in the date column have caused this problem to
+            occur. Please check that no such values are present and hopefully it will
+            rectify the import on the next attempt.
+          </p>
+        </div>
+      </section>
+    {% endif %}
+
+    <h1>{% block title %}{% endblock %}</h1>
+
+    {% block content %}{% endblock %}
+  </div>
+</body>
+
+</html>
